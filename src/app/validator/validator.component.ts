@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ContentChild, AfterContentInit, Output, EventEmitter } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { NgModel, FormControlName, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-validator',
@@ -10,15 +10,13 @@ export class ValidatorComponent implements OnInit, AfterContentInit {
 
   @Input() input: any;
   @ContentChild(NgModel) model: NgModel;
+  @ContentChild(FormControlName) control: FormControlName;
   @Input() label: string;
   @Input() id: string;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngAfterContentInit() {
-    this.input = this.model;
+    this.input = this.control;
   }
 }

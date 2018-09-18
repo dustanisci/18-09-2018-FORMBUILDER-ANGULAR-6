@@ -1,5 +1,6 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 const I18N_VALUES = {
   'pt': {
@@ -44,13 +45,25 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   selectedDate: NgbDateStruct
   minDate: NgbDateStruct = { day: 1, month: 1, year: (new Date().getFullYear() - 130) };
   maxDate: NgbDateStruct = { day: 1, month: 1, year: (new Date().getFullYear() - 10) };
   dateFormat: String;
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit(){
+    this.form = this.formBuilder.group({
+      nome: this.formBuilder.control(''),
+      cpf: this.formBuilder.control(''),
+      rg: this.formBuilder.control(''),
+      dtnascimento: this.formBuilder.control(''),
+      genero: this.formBuilder.control(''),
+      estado: this.formBuilder.control('')     
+    })
+  }
 
   onDateSelect(event) {
     let day: String = String(event.day);
@@ -66,8 +79,4 @@ export class AppComponent {
 
     this.dateFormat = day + "/" + month + "/" + event.year;
   }
-
-
-
-
 }
