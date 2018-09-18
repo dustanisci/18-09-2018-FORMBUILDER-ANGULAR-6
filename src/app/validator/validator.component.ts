@@ -17,6 +17,6 @@ export class ValidatorComponent implements OnInit, AfterContentInit {
   ngOnInit() { }
 
   ngAfterContentInit() {
-    this.input = this.control;
+    this.input = this.model || this.control;
   }
 }

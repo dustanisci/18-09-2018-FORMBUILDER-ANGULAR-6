@@ -58,10 +58,7 @@ export class AppComponent implements OnInit {
     this.form = this.formBuilder.group({
       nome: this.formBuilder.control(''),
       cpf: this.formBuilder.control(''),
-      rg: this.formBuilder.control(''),
-      dtnascimento: this.formBuilder.control(''),
-      genero: this.formBuilder.control(''),
-      estado: this.formBuilder.control('')     
+      rg: this.formBuilder.control('')   
     })
   }
 

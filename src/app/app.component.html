@@ -1,22 +1,22 @@
 <div class="container">
   <div class="row">
 
-    <form novalidate class="mt-5 col-12 col-sm-10 col-md-5 col-lg-4 mx-auto">
+    <form novalidate [formGroup]="form" class="mt-5 col-12 col-sm-10 col-md-5 col-lg-4 mx-auto">
       <h1 class="text-center mb-5">Cadastro</h1>
 
       <app-validator>
         <label for="nome">Nome</label>
-        <input ngModel id="nome" name="nome" class="form-control">
+        <input ngModel id="nome" formControlName="nome" class="form-control">
       </app-validator>
 
       <app-validator>
         <label for="cpf">CPF</label>
-        <input ngModel id="cpf" name="cpf" class="form-control">
+        <input ngModel id="cpf" formControlName="cpf" class="form-control">
       </app-validator>
 
       <app-validator>
         <label for="rg">RG</label>
-        <input ngModel id="rg" name="rg" class="form-control">
+        <input ngModel id="rg" formControlName="rg" class="form-control">
       </app-validator>
 
       <button [disabled]="!form.valid" class="btn btn-success col-12 col-sm-12 mt-5 mb-5" type="submit">Cadastrar</button>
