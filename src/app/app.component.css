@@ -1,0 +1,11 @@
+.erro {
+    border-color:red;
+}
+
+.sucesso {
+    border-color:green;
+}
+
+.btn-success:disabled{
+    cursor:not-allowed;
+}
