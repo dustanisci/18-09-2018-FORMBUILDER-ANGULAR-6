@@ -11,12 +11,12 @@
 
       <app-validator>
         <label for="cpf">CPF</label>
-        <input ngModel id="cpf" formControlName="cpf" class="form-control">
+        <input ngModel id="cpf" formControlName="cpf" class="form-control" minlength="11" maxlength="11>
       </app-validator>
 
       <app-validator>
         <label for="rg">RG</label>
-        <input ngModel id="rg" formControlName="rg" class="form-control">
+        <input ngModel id="rg" formControlName="rg" class="form-control" minlength="7" maxlength="12">
       </app-validator>
 
       <button [disabled]="!form.valid" class="btn btn-success col-12 col-sm-12 mt-5 mb-5" type="submit">Cadastrar</button>

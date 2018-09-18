@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { NgbDatepickerI18n, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 const I18N_VALUES = {
   'pt': {
@@ -51,14 +51,14 @@ export class AppComponent implements OnInit {
   maxDate: NgbDateStruct = { day: 1, month: 1, year: (new Date().getFullYear() - 10) };
   dateFormat: String;
   form: FormGroup;
-
+ 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(){
     this.form = this.formBuilder.group({
-      nome: this.formBuilder.control(''),
-      cpf: this.formBuilder.control(''),
-      rg: this.formBuilder.control('')   
+      nome: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.pattern(/[a-z].{6,}/)]),
+      cpf: this.formBuilder.control('', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(/[0-9]{11}/)]),
+      rg: this.formBuilder.control('', [Validators.required, Validators.minLength(7), Validators.maxLength(12)])   
     })
   }
 
