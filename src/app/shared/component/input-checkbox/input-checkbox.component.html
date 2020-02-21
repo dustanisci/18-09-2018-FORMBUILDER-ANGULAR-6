@@ -1,0 +1,13 @@
+<ng-container *ngFor="let checkbox of checkboxes">
+  <div class="container">
+    <input type="checkbox" [ngClass]="{'invalid': error}" #selectedCheckbox
+      (click)="setChecked(checkbox.value, selectedCheckbox.checked)" [id]="checkbox.value" [value]="checkbox.value"
+      [checked]="checkbox.checked">
+    <label [for]="checkbox.value">{{ checkbox.label }}</label>
+  </div>
+</ng-container>
+
+<div class="container-options">
+  <label (click)="selectOrDeselect(true)">Marcar todos</label>
+  <label (click)="selectOrDeselect(false)">Desmarcar todos</label>
+</div>

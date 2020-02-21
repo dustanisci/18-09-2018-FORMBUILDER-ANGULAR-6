@@ -1,27 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ValidValidatorComponent } from './valid-validator/valid-validator.component';
-import { InvalidValidatorComponent } from './invalid-validator/invalid-validator.component';
-import { ValidatorComponent } from './validator/validator.component';
-import { TextMaskModule } from 'angular2-text-mask';
 
+import { AppComponent } from './app.component';
+import { MsgComponent } from './shared/component/msg/msg.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputCheckboxComponent } from './shared/component/input-checkbox/input-checkbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValidValidatorComponent,
-    InvalidValidatorComponent,
-    ValidatorComponent
+    MsgComponent,
+    InputCheckboxComponent
   ],
   imports: [
     BrowserModule,
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TextMaskModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

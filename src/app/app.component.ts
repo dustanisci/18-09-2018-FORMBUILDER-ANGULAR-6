@@ -1,79 +1,76 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { NgbDatepickerI18n, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-const I18N_VALUES = {
-  'pt': {
-    weekdays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-    months: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-  }
-};
-
-@Injectable()
-export class I18n {
-  language = 'pt';
-}
-
-@Injectable()
-export class CustomDatepickerI18n extends NgbDatepickerI18n {
-
-  constructor(private _i18n: I18n) {
-    super();
-  }
-
-  getWeekdayShortName(weekday: number): string {
-    return I18N_VALUES[this._i18n.language].weekdays[weekday - 1];
-  }
-
-  getMonthShortName(month: number): string {
-    return I18N_VALUES[this._i18n.language].months[month - 1];
-  }
-
-  getMonthFullName(month: number): string {
-    return this.getMonthShortName(month);
-  }
-
-  getDayAriaLabel(date: NgbDateStruct): string {
-    return `${date.day}-${date.month}-${date.year}`;
-  }
-}
+import { Component } from '@angular/core';
+import { ErrorMsg } from './shared/model/error-msg';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { candy } from './shared/mocky/candy';
+import { validateCheckbox } from './shared/reactive-forms/validate-checkbox';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
+export class AppComponent {
 
-export class AppComponent implements OnInit {
-  selectedDate: NgbDateStruct
-  minDate: NgbDateStruct = { day: 1, month: 1, year: (new Date().getFullYear() - 130) };
-  maxDate: NgbDateStruct = { day: 1, month: 1, year: (new Date().getFullYear() - 10) };
-  dateFormat: String;
-  form: FormGroup;
- 
-  constructor(private formBuilder: FormBuilder) { }
+  public error: ErrorMsg = new ErrorMsg();
+  public actionSave = false;
 
-  ngOnInit(){
-    this.form = this.formBuilder.group({
-      nome: this.formBuilder.control('', [Validators.required, Validators.minLength(10), Validators.pattern(/[a-z].{6,}/)]),
-      cpf: this.formBuilder.control('', [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern(/[0-9]{11}/)]),
-      rg: this.formBuilder.control('', [Validators.required, Validators.minLength(7), Validators.maxLength(12)])   
-    })
+  public form: FormGroup = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+    age: [65, []],
+    color: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    candy: [candy, [validateCheckbox]],
+    jobs: ['', [Validators.required, Validators.minLength(10)]]
+  });
+
+  constructor(private fb: FormBuilder) { }
+
+  public validate(controlName: string, field: string) {
+    if (this.form.get(controlName).errors && this.form.get(controlName).errors.required) {
+      this.error[controlName] = `${field} é um campo obrigatório`;
+    } else if (this.form.get(controlName).errors && this.form.get(controlName).errors.minlength) {
+      this.error[controlName] = `${field} é no mínimo ${this.form.get(controlName).errors.minlength.requiredLength} caracteres`;
+    } else if (this.form.get(controlName).errors && this.form.get(controlName).errors.maxlength) {
+      this.error[controlName] = `${field} é no mínimo ${this.form.get(controlName).errors.maxlength.requiredLength} caracteres`;
+    }
   }
 
-  onDateSelect(event) {
-    let day: String = String(event.day);
-    let month: String = String(event.month);
+  public send(): void {
+    this.error = new ErrorMsg();
 
-    if (day.length == 1) {
-      day = "0" + day;
+    let fieldBr: string;
+    for (const field of Object.keys(this.form.value)) {
+
+      switch (field) {
+        case 'name': {
+          fieldBr = 'Nome';
+          break;
+        }
+
+        case 'color': {
+          fieldBr = 'Cor';
+          break;
+        }
+
+        case 'candy': {
+          fieldBr = 'Doce';
+          break;
+        }
+
+        case 'jobs': {
+          fieldBr = 'Jobs';
+          break;
+        }
+      }
+
+      this.validate(field, fieldBr);
     }
 
-    if (month.length == 1) {
-      month = "0" + month;
+
+    if (this.form.valid) {
+      this.actionSave = true;
+      setTimeout(() => this.actionSave = false, 1000);
     }
 
-    this.dateFormat = day + "/" + month + "/" + event.year;
   }
+
 }
