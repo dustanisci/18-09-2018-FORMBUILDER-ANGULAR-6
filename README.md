@@ -8,5 +8,4 @@
 <ul>
   <li>Angular 9</li>
   <li>Reactive Forms</li>
-<li>Design Pattern</li>
 </ul>
