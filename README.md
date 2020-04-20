@@ -12,4 +12,4 @@
   <li>SCSS / CSS 3</li>
   <li>TypeScript</li>
   <li>JavaScript</li>
-</ul>
+</ul> 
