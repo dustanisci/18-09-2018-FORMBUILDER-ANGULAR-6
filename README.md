@@ -1,8 +1,8 @@
 # Reactive Forms
 
-<b>Descrição:</b> Exemplo de uma implementação com Reactive Forms no Angular 9, formulário com validações e mensagens personalizadas.
+<b>Descrição:</b> Exemplo de uma implementação com Reactive Forms no Angular 12, formulário com validações e mensagens personalizadas.
 
-<b>Endereço de acesso:</b> https://dustanisci.github.io/reactive-forms-angular9/
+<b>Endereço de acesso:</b> https://dustanisci.github.io/reactive-forms-angular12/
 
 <b>Tecnologias utilizadas:</b>
 <ul>
