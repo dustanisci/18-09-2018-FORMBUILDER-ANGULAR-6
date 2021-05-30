@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ErrorMsg } from './shared/model/error-msg';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { candy } from './shared/mocky/candy';
+import { candy } from './shared/mock/candy';
 import { validateCheckbox } from './shared/reactive-forms/validate-checkbox';
 
 @Component({
